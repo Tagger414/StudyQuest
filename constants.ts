@@ -1,0 +1,153 @@
+
+import { StudyMode, Achievement, Theme, ThemeColors } from './types';
+import { StarIcon, BookOpenIcon, ClockIcon, MoonIcon, AcademicCapIcon, SunIcon } from './components/icons/Icons';
+
+export const STUDY_MODES: Record<string, StudyMode> = {
+  pomodoro: { id: 'pomodoro', name: 'Pomodoro', studyMinutes: 25, breakMinutes: 5 },
+  deepFocus: { id: 'deepFocus', name: 'Deep Focus', studyMinutes: 50, breakMinutes: 10 },
+  custom: { id: 'custom', name: 'Custom', studyMinutes: 45, breakMinutes: 15 },
+};
+
+export const ACHIEVEMENTS: Achievement[] = [
+  {
+    id: 'first_steps',
+    name: 'First Steps',
+    description: 'Complete your first study session.',
+    icon: StarIcon,
+    condition: (data) => data.sessionLogs.length > 0,
+  },
+  {
+    id: 'apprentice',
+    name: 'Study Apprentice',
+    description: 'Accumulate 10 total hours of study time.',
+    icon: BookOpenIcon,
+    condition: (data) => data.totalStudyTime >= 10 * 3600,
+  },
+  {
+    id: 'adept',
+    name: 'Study Adept',
+    description: 'Accumulate 50 total hours of study time.',
+    icon: BookOpenIcon,
+    condition: (data) => data.totalStudyTime >= 50 * 3600,
+  },
+  {
+    id: 'master',
+    name: 'Study Master',
+    description: 'Accumulate 100 total hours of study time.',
+    icon: AcademicCapIcon,
+    condition: (data) => data.totalStudyTime >= 100 * 3600,
+  },
+  {
+    id: 'early_bird',
+    name: 'Early Bird',
+    description: 'Complete a session before 8 AM.',
+    icon: SunIcon,
+    condition: (data) => data.sessionLogs.some(log => new Date(log.date).getHours() < 8),
+  },
+  {
+    id: 'night_owl',
+    name: 'Night Owl',
+    description: 'Complete a session after 10 PM.',
+    icon: MoonIcon,
+    condition: (data) => data.sessionLogs.some(log => new Date(log.date).getHours() >= 22),
+  },
+  {
+    id: 'streaker',
+    name: 'Consistent Streaker',
+    description: 'Achieve a 7-day study streak.',
+    icon: ClockIcon,
+    condition: (data) => data.streak >= 7,
+  },
+    {
+    id: 'pomodoro_pro',
+    name: 'Pomodoro Pro',
+    description: 'Complete 10 Pomodoro sessions.',
+    icon: ClockIcon,
+    condition: (data) => data.sessionLogs.filter(s => s.mode === 'pomodoro').length >= 10,
+  }
+];
+
+export const SHOP_THEMES: Theme[] = [
+  { id: 'forest', name: 'Forest Theme', cost: 100, icon: StarIcon },
+  { id: 'ocean', name: 'Ocean Theme', cost: 150, icon: StarIcon },
+  { id: 'sunset', name: 'Sunset Theme', cost: 200, icon: StarIcon },
+  { id: 'midnight', name: 'Midnight Theme', cost: 250, icon: StarIcon },
+];
+
+export const THEME_COLORS: Record<string, ThemeColors> = {
+  default: {
+    bg: 'bg-[#FFFBEB]',
+    text: 'text-amber-900',
+    primary: 'text-orange-500',
+    primaryBg: 'bg-orange-500',
+    primaryBgHover: 'hover:bg-orange-600',
+    secondaryBg: 'bg-orange-100',
+    cardBg: 'bg-orange-50/70',
+    cardText: 'text-amber-900',
+    progressBg: 'bg-orange-200',
+    progressFg: 'bg-orange-500',
+    navActive: 'text-orange-500',
+    navInactive: 'text-amber-800',
+    buttonText: 'text-white',
+  },
+  forest: {
+    bg: 'bg-green-50',
+    text: 'text-green-900',
+    primary: 'text-green-600',
+    primaryBg: 'bg-green-600',
+    primaryBgHover: 'hover:bg-green-700',
+    secondaryBg: 'bg-green-100',
+    cardBg: 'bg-green-100/70',
+    cardText: 'text-green-900',
+    progressBg: 'bg-green-200',
+    progressFg: 'bg-green-600',
+    navActive: 'text-green-600',
+    navInactive: 'text-green-800',
+    buttonText: 'text-white',
+  },
+  ocean: {
+    bg: 'bg-blue-50',
+    text: 'text-blue-900',
+    primary: 'text-blue-500',
+    primaryBg: 'bg-blue-500',
+    primaryBgHover: 'hover:bg-blue-600',
+    secondaryBg: 'bg-blue-100',
+    cardBg: 'bg-blue-100/70',
+    cardText: 'text-blue-900',
+    progressBg: 'bg-blue-200',
+    progressFg: 'bg-blue-500',
+    navActive: 'text-blue-500',
+    navInactive: 'text-blue-800',
+    buttonText: 'text-white',
+  },
+  sunset: {
+    bg: 'bg-red-50',
+    text: 'text-red-900',
+    primary: 'text-red-500',
+    primaryBg: 'bg-red-500',
+    primaryBgHover: 'hover:bg-red-600',
+    secondaryBg: 'bg-red-100',
+    cardBg: 'bg-red-100/70',
+    cardText: 'text-red-900',
+    progressBg: 'bg-red-200',
+    progressFg: 'bg-red-500',
+    navActive: 'text-red-500',
+    navInactive: 'text-red-800',
+    buttonText: 'text-white',
+  },
+  midnight: {
+    bg: 'bg-gray-900',
+    text: 'text-gray-200',
+    primary: 'text-purple-400',
+    primaryBg: 'bg-purple-600',
+    primaryBgHover: 'hover:bg-purple-700',
+    secondaryBg: 'bg-gray-800',
+    cardBg: 'bg-gray-800/70',
+    cardText: 'text-gray-200',
+    progressBg: 'bg-gray-700',
+    progressFg: 'bg-purple-500',
+    navActive: 'text-purple-400',
+    navInactive: 'text-gray-400',
+    buttonText: 'text-white',
+  },
+};
